@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>cdefchbduh</h1>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script> -->
+
+<script>
+//   var socket = io.connect('http://192.168.50.177:8080');
+//   socket.on('news', function (data) {
+//     console.log("saliut sa passe",data);
+//     socket.emit('event', { my: 'data' });
+//   });
+
+
+
+const socket = new WebSocket('ws://192.168.50.177:8080');
+ 
+socket.onopen=('open', () => {
+  socket.send('Hello World!');
+});
+
+function sendMessage(socket, userName, content) {
+  socket.send(
+    JSON.stringify({
+      userName,
+      content
+    })
+  )
+}
+ 
+function receiveMessage(message) {
+  console.log(`${message.userName} is saying: ${message.content}`)
+}
+
+socket.addEventListener('message', event => {
+  console.log(`Message from server: ${event.data}`);
+});
+
+</script>
+
+</body>
+
+</html> 
